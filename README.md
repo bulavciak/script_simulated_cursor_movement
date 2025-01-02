@@ -6,49 +6,49 @@ This PowerShell script provides realistic mouse cursor movement across the entir
 **Script Components:**
 
 1. **Definition of `Mouse` and `StayAwake` classes:**
-- The `Mouse` class provides the `SetCursorPos` method to set the cursor position and other methods to simulate clicks.
-- The `StayAwake` class uses the `SetThreadExecutionState` function to prevent Windows from going to sleep.
+   - The `Mouse` class provides the `SetCursorPos` method to set the cursor position and other methods to simulate clicks.
+   - The `StayAwake` class uses the `SetThreadExecutionState` function to prevent Windows from going to sleep.
 
 2. **`Get-ScreenResolution` function:**
-- Gets the dimensions of the entire desktop, including multiple monitors, using the `GetSystemMetrics` API.
-- Returns an object containing the width, height, and position (top-left corner).
+   - Gets the dimensions of the entire desktop, including multiple monitors, using the `GetSystemMetrics` API.
+   - Returns an object containing the width, height, and position (top-left corner).
 
 3. **Function `Move-Cursor-Smooth`:**
-- Performs smooth mouse movement between two points with random pauses (1-5 ms).
-- Parameters:
-- `$startX`, `$startY`: Starting coordinates.
-- `$endX`, `$endY`: Destination coordinates.
-- `$steps`: Number of steps to interpolate between points (default: 60).
+   - Performs smooth mouse movement between two points with random pauses (1-5 ms).
+   - Parameters:
+   - `$startX`, `$startY`: Starting coordinates.
+   - `$endX`, `$endY`: Destination coordinates.
+   - `$steps`: Number of steps to interpolate between points (default: 60).
 
 4. **Function `Prevent-Sleep`:**
-- Calls `SetThreadExecutionState` to prevent Windows from going to sleep.
+   - Calls `SetThreadExecutionState` to prevent Windows from going to sleep.
 
 5. **Function `Get-CursorPosition`:**
-- Gets the current cursor position using the `GetCursorPos` API.
+   - Gets the current cursor position using the `GetCursorPos` API.
 
 6. **Function `Generate-RandomPosition`:**
-- Generates random coordinates within a specified range:
-- `$minX`, `$maxX`: Range for X coordinate.
-- `$minY`, `$maxY`: Range for Y coordinate.
+   - Generates random coordinates within a specified range:
+   - `$minX`, `$maxX`: Range for X coordinate.
+   - `$minY`, `$maxY`: Range for Y coordinate.
 
 7. **Main loop:**
-- All functions are called in an infinite loop:
-1. Prevent sleep by calling `Prevent-Sleep`.
-2. Get current cursor position via `Get-CursorPosition`.
-3. Generate random target position via `Generate-RandomPosition`.
-4. Move cursor to target position smoothly via `Move-Cursor-Smooth`.
-5. Pause between moves (500-1500 ms).
+   - All functions are called in an infinite loop:
+      1. Prevent sleep by calling `Prevent-Sleep`.
+      2. Get current cursor position via `Get-CursorPosition`.
+      3. Generate random target position via `Generate-RandomPosition`.
+      4. Move cursor to target position smoothly via `Move-Cursor-Smooth`.
+      5. Pause between moves (500-1500 ms).
 
 #### **Key Features and Methods:**
 
 1. **Realistic Mouse Movement:**
-- The script interpolates the movement between points and adds subtle pauses to make the movement look natural.
+   - The script interpolates the movement between points and adds subtle pauses to make the movement look natural.
 
 2. **Multi-Monitor Support:**
-- The script takes into account the total resolution of the desktop, including multiple monitors.
+   - The script takes into account the total resolution of the desktop, including multiple monitors.
 
 3. **Sleep Prevention:**
-- Using the `SetThreadExecutionState` function ensures that the system remains active even without user interaction.
+   - Using the `SetThreadExecutionState` function ensures that the system remains active even without user interaction.
 
 #### **Using the script:**
 
@@ -56,18 +56,18 @@ This PowerShell script provides realistic mouse cursor movement across the entir
 2. Save the script to a file (e.g. `MouseMovement.ps1`).
 3. Run the script using:
 
-powershell -ExecutionPolicy Bypass -File "C:\path\to\file\MouseMovement.ps1
+   'powershell -ExecutionPolicy Bypass -File "C:\path\to\file\MouseMovement.ps1'
 
 #### **Customization:**
 
 - **Movement speed:**
-- By increasing or decreasing the `$steps` value in the `Move-Cursor-Smooth` function.
+   - By increasing or decreasing the `$steps` value in the `Move-Cursor-Smooth` function.
 
 - **Movement range:**
-- You can change the `$minX`, `$maxX`, `$minY`, `$maxY` values.
+   - You can change the `$minX`, `$maxX`, `$minY`, `$maxY` values.
 
 - **Pauses between movements:**
-- By adjusting the range in `Start-Sleep -Milliseconds (Get-Random -Minimum 500 -Maximum 1500)`.
+   - By adjusting the range in `Start-Sleep -Milliseconds (Get-Random -Minimum 500 -Maximum 1500)`.
 
 #### **Notes:**
 
