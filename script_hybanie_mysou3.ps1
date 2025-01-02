@@ -29,7 +29,7 @@ public class StayAwake {
 }
 "@
 
-# Funkcia na získanie rozlíšenia obrazovky vrátane viacerých monitorov
+# Function to get screen resolution including multiple monitors - Funkcia na získanie rozlíšenia obrazovky vrátane viacerých monitorov
 function Get-ScreenResolution {
     Add-Type @"
     using System;
@@ -63,7 +63,7 @@ function Get-ScreenResolution {
     }
 }
 
-# Funkcia na plynulý pohyb kurzora
+# Smooth cursor movement function - Funkcia na plynulý pohyb kurzora
 function Move-Cursor-Smooth {
     param (
         [int]$startX,
@@ -83,12 +83,12 @@ function Move-Cursor-Smooth {
     }
 }
 
-# Funkcia na zabránenie režimu spánku
+# Sleep prevention function - Funkcia na zabránenie režimu spánku
 function Prevent-Sleep {
     [StayAwake]::PreventSleep()
 }
 
-# Funkcia na získanie aktuálnej polohy kurzora
+# Function to get the current cursor position - Funkcia na získanie aktuálnej polohy kurzora
 function Get-CursorPosition {
     Add-Type @"
     using System;
@@ -114,7 +114,7 @@ function Get-CursorPosition {
     return @{ X = $point.X; Y = $point.Y }
 }
 
-# Generovanie náhodných súradníc v rámci celej obrazovky
+# Generating random coordinates across the entire screen - Generovanie náhodných súradníc v rámci celej obrazovky
 function Generate-RandomPosition {
     param (
         [int]$minX,
@@ -127,28 +127,28 @@ function Generate-RandomPosition {
     return @{ X = $x; Y = $y }
 }
 
-# Získanie celkového rozlíšenia obrazovky
+# Getting the overall screen resolution - Získanie celkového rozlíšenia obrazovky
 $screen = Get-ScreenResolution
 $minX = $screen.Left
 $maxX = $screen.Left + $screen.Width
 $minY = $screen.Top
 $maxY = $screen.Top + $screen.Height
 
-# Nekonečný cyklus na realistický pohyb kurzora
+# Infinite loop for realistic cursor movement - Nekonečný cyklus na realistický pohyb kurzora
 while ($true) {
     Prevent-Sleep
 
-    # Získanie aktuálnej pozície kurzora
+    # Get the current cursor position - Získanie aktuálnej pozície kurzora
     $currentPosition = Get-CursorPosition
 
-    # Generovanie náhodnej cieľovej pozície
+    # Generating a random target position - Generovanie náhodnej cieľovej pozície
     $targetPosition = Generate-RandomPosition -minX $minX -maxX $maxX -minY $minY -maxY $maxY
 
-    # Plynulý pohyb myši
+    # Smooth mouse movement - Plynulý pohyb myši
     Move-Cursor-Smooth -startX $currentPosition.X -startY $currentPosition.Y `
                        -endX $targetPosition.X -endY $targetPosition.Y `
                        -steps (Get-Random -Minimum 50 -Maximum 100)
 
-    # Náhodná pauza medzi pohybmi
+    # Random pause between movements - Náhodná pauza medzi pohybmi
     Start-Sleep -Milliseconds (Get-Random -Minimum 500 -Maximum 1500)
 }
